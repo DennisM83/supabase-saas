@@ -4,7 +4,7 @@ export default function Home({ lessons }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       {lessons.map((lesson) => (
-        <p>{lesson.title}</p>
+        <p key={lesson.id}>{lesson.title}</p>
       ))}
     </div>
   )
