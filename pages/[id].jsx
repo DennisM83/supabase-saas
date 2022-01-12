@@ -2,8 +2,8 @@ import { supabase } from "../utils/supabase";
 
 export default function LessonDetails({ lesson }) {
   return (
-    <div>
-      <h1>{lesson.title}</h1>
+    <div className="w-full max-w-3xl mx-auto py-16 px-8">
+      <h1 className="text-3xl mb-6">{lesson.title}</h1>
       <p>{lesson.description}</p>
     </div>
   );
