@@ -9,8 +9,27 @@ const Provider = ({ children }) => {
   const [user, setUser] = useState(supabase.auth.user());
 
   useEffect(() => {
+    const getUserProfile = async () => {
+      const sessionUser = supabase.auth.user();
+
+      if (sessionUser) {
+        const { data: profile } = await supabase
+          .from("profile")
+          .select("*")
+          .eq("id", sessionUser.id)
+          .single()
+
+          setUser({
+              ...sessionUser,
+              ...profile
+          })
+      }
+    };
+
+    getUserProfile();
+
     supabase.auth.onAuthStateChange(() => {
-      setUser(supabase.auth.user());
+      getUserProfile();
     });
   }, []);
 
@@ -29,7 +48,7 @@ const Provider = ({ children }) => {
   const exposed = {
     user,
     login,
-    logout
+    logout,
   };
   return <Context.Provider value={exposed}>{children}</Context.Provider>;
 };
