@@ -1,7 +1,10 @@
 import { supabase } from "../utils/supabase";
 import Link from "next/link";
+import { useUser } from '../context/user'
 
 export default function Home({ lessons }) {
+  const { user } = useUser();
+  console.log({ user })
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       {lessons.map((lesson) => (
